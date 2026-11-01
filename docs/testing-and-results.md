@@ -1,52 +1,53 @@
 # Testing and Results
 
-## Current evidence status
+## Evidence available
 
-A working physical prototype demonstration has been reported and is evidenced by a video: the system operated the 12 V DC fan and LED demonstration loads. Add that video and supporting photographs to this repository so the evidence is accessible. This demonstrates the low-voltage DC setup only; it does not establish a 220 V AC/mains-connected installation or its safety.
+The team has supplied a working demonstration video in the project conversation and a material-selection slide showing key components and prototype hardware. The video still needs to be added or linked in this repository. The reported physical demonstration uses a 12 V DC fan and an LED light board; it does not establish a 220–240 V mains-connected build or its safety.
 
-| Test | Expected result | Actual result | Current status |
-|---|---|---|---|
-| Arduino startup | Controller starts in a defined state | Not documented | Not verified |
-| Relay activation | Relay changes contact state when commanded | Not documented | Not verified |
-| LED switching (low-voltage demo) | LED demonstration load changes state as intended | Working prototype video reported; detailed test log/measurements not yet added | Demonstrated; supporting evidence to upload |
-| Fan switching (12 V DC demo) | Demonstration fan changes state as intended | Working prototype video reported; detailed test log/measurements not yet added | Demonstrated; supporting evidence to upload |
-| Push-button input | Press produces specified override action | Behaviour/result not documented | Not verified |
-| Combined/independent control (demo) | Demonstration loads follow the implemented control behaviour | Working prototype video reported; exact behaviour should be described alongside evidence | Demonstrated; details to document |
-| Simulation run | Wokwi circuit runs without errors | Layout screenshot described; run result not documented | Not verified |
-| Power stability | No unintended resets or switching | Not documented | Not verified |
-| Repeated operation | Switching remains consistent | Not documented | Not verified |
+## Demonstrated behaviour reported by the team
+
+| Scenario | Expected/observed behaviour described by the team | Evidence status |
+|---|---|---|
+| Room/latch locked | Fan and light switch OFF automatically | Reported as evident in the demonstration video; detailed test log not yet recorded |
+| Room/latch unlocked | Fan and light switch ON automatically | Reported as evident in the demonstration video; detailed test log not yet recorded |
+| Push button pressed | Temporarily overrides automatic control | Reported by the team; exact override-resume condition still needs documenting |
+| Fan and light | Controlled together | Confirmed by the team |
+| Demonstration load type | 12 V DC fan and LED light board | Low-voltage demonstration; no mains test claimed |
+
+These are documented as team-reported demonstration behaviour. Add a dated test record and the video link when the media is committed.
+
+## Verification matrix
+
+| Test | Current status | Next evidence to record |
+|---|---|---|
+| Arduino startup and reset state | Not separately documented | Startup state and any unexpected relay activation |
+| Reed switch response | Behaviour described; raw readings not recorded | Magnet/switch state and Arduino input readings |
+| Relay input polarity | Not documented | Module trigger logic and relay state |
+| Lock → OFF | Demonstrated behaviour reported | Video timestamp and repeat-cycle result |
+| Unlock → ON | Demonstrated behaviour reported | Video timestamp and repeat-cycle result |
+| Push-button temporary override | Demonstrated behaviour reported; resume condition unclear | Button action, duration/termination condition and return to automatic mode |
+| Combined fan/light control | Confirmed as team-reported behaviour | Video timestamp and repeat-cycle result |
+| Power stability/repeated cycles | No structured results recorded | Number of cycles, supply conditions, failures/resets |
+| Mains operation/safety | Not performed/verified in project evidence | Do not attempt without separate qualified design and safety review |
 
 ## Test record template
 
 ```text
 Test ID:
 Date/time:
-Hardware or simulation revision:
+Hardware/firmware revision:
 Objective:
 Setup and supply conditions:
 Expected result:
 Actual observed result:
-Measurements (with units and instrument):
+Measurements (units and instrument):
 Pass / fail / blocked:
 Issue or deviation:
 Change made:
 Retest result:
-Evidence filename/link:
+Evidence filename/link and timestamp:
 ```
-
-## Suggested verification order
-
-1. Review schematic and component datasheets before applying power.
-2. Verify supply rails and polarity independently.
-3. Test controller and button input without connecting loads.
-4. Verify relay input polarity and relay operation using an appropriate safe test setup.
-5. Verify load specifications and switching path independently.
-6. Test the chosen combined/independent control behaviour.
-7. Exercise repeated cycles and record unexpected resets, noise or heating.
-8. Test the exact manual-override behaviour and power-up/reset state.
-
-Do not mark a test as passed based on a component photograph or an unrun simulation diagram. Preserve failures and design changes as part of the iteration history.
 
 ## Results summary
 
-No measured test results are entered here because none are established in the available project record.
+A working low-voltage demonstration is reported by the team. Structured measurements, repeatability data, energy-savings measurements, formal user-validation results and mains safety verification are not documented here. These should remain unclaimed unless supporting evidence is added.
