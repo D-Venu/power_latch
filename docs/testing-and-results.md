@@ -2,16 +2,16 @@
 
 ## Current evidence status
 
-The available project notes establish that hardware components have been identified, circuit diagrams have been discussed/created, a Wokwi layout has been started and an initial sketch has been shown. They do not establish a complete physical assembly or successful end-to-end operation.
+A working physical prototype demonstration has been reported and is evidenced by a video: the system operated the 12 V DC fan and LED demonstration loads. Add that video and supporting photographs to this repository so the evidence is accessible. This demonstrates the low-voltage DC setup only; it does not establish a 220 V AC/mains-connected installation or its safety.
 
 | Test | Expected result | Actual result | Current status |
 |---|---|---|---|
 | Arduino startup | Controller starts in a defined state | Not documented | Not verified |
 | Relay activation | Relay changes contact state when commanded | Not documented | Not verified |
-| LED switching | LED load changes state as intended | Not documented | Not verified |
-| Fan switching | Fan load changes state as intended | Not documented | Not verified |
+| LED switching (low-voltage demo) | LED demonstration load changes state as intended | Working prototype video reported; detailed test log/measurements not yet added | Demonstrated; supporting evidence to upload |
+| Fan switching (12 V DC demo) | Demonstration fan changes state as intended | Working prototype video reported; detailed test log/measurements not yet added | Demonstrated; supporting evidence to upload |
 | Push-button input | Press produces specified override action | Behaviour/result not documented | Not verified |
-| Combined/independent control | Loads follow chosen control design | Final topology not documented | Not verified |
+| Combined/independent control (demo) | Demonstration loads follow the implemented control behaviour | Working prototype video reported; exact behaviour should be described alongside evidence | Demonstrated; details to document |
 | Simulation run | Wokwi circuit runs without errors | Layout screenshot described; run result not documented | Not verified |
 | Power stability | No unintended resets or switching | Not documented | Not verified |
 | Repeated operation | Switching remains consistent | Not documented | Not verified |
