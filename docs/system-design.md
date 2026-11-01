@@ -2,47 +2,54 @@
 
 ## Purpose
 
-The intended system is a controller for high-voltage AC supply lines feeding room appliances such as fans and lights. The course prototype demonstrated the control concept using a 12 V DC fan and LED light board as safer low-voltage presentation loads, avoiding a 220 V mains connection in the hostel room.
+Power Latch is intended to control room AC appliance circuits based on the locked/unlocked state of a door or latch. The physical demonstration used a 12 V DC fan and an LED light board instead of connecting the prototype to 220–240 V mains.
 
-## Conceptual architecture
+## Functional architecture
 
 ```mermaid
-flowchart TB
-    INPUT[Momentary push button] --> MCU[Arduino Nano]
-    MCU -->|digital control| RELAY[5 V two-channel relay module]
-    AC[Room AC mains supply] --> CONTACTS[Relay contact path]
-    RELAY --> CONTACTS
-    CONTACTS --> FAN[12 V DC fan]
-    CONTACTS --> LED[LED light board]
+flowchart TD
+    MAG[Magnet attached to moving door/latch] --> REED[Magnetic reed switch]
+    REED -->|D3| MCU[Arduino Nano]
+    BTN[Momentary push button] -->|D11| MCU
+    MCU -->|D5 / IN1| RELAY[5 V relay module]
+    RELAY --> LOAD[Low-voltage demonstration load circuit]
+    LOAD --> FAN[12 V DC fan]
+    LOAD --> LED[LED light board]
 ```
 
-This diagram expresses the intended functional concept and separately indicates the low-voltage demonstration. It is not a pin-accurate wiring schematic, a mains wiring instruction, or evidence of a mains-connected build.
+This is a functional block diagram, not a pin-accurate wiring schematic. The relay switches the separate load circuit; Arduino GPIO pins must not power the fan or light directly.
 
-## Control side and load side
+## Operating sequence
 
-**Control side:** Arduino Nano clone, two-channel 5 V relay module, momentary tactile push button and appropriate regulated supply arrangement.
+1. **Initialization:** Arduino Nano and control electronics receive their required supply.
+2. **Latch-state sensing:** The magnet moves relative to the reed switch as the door/latch is secured or released.
+3. **Input reading:** The reed switch is connected to D3 and GND according to the presentation. With `INPUT_PULLUP`, a closed switch to GND normally reads LOW; firmware must match the actual sensor arrangement.
+4. **Decision:** The Arduino interprets the sensor state as locked or unlocked.
+5. **Relay command:** The Arduino drives relay input IN1 from D5. Confirm the actual module's trigger polarity; relay boards may be active-low.
+6. **Load switching:** In the described demonstration behaviour, locking turns the fan and light OFF, while unlocking turns them ON. The two demonstration loads are controlled together.
+7. **Manual override:** The momentary push button connects to D11 and GND. It temporarily overrides automatic control. The exact condition that ends the override and resumes automatic behaviour should be verified against the final firmware/demo.
 
-**Intended load side:** Room AC supply circuits for loads such as fans and lights.\n\n**Demonstration load side:** Battery labelled 12 V, 12000 mAh; 12 V DC fan; LED light board. These low-voltage loads were used for the course presentation in place of a 220 V mains connection.
+## Pin summary
 
-The control supply and load supply are distinct. The 12 V battery powered the low-voltage demonstration loads; do not connect it to the relay module's 5 V `VCC` input. The exact arrangement for powering the Arduino and relay module must be confirmed from the actual board and final circuit.
+| Component | Connection | Function |
+|---|---|---|
+| Magnetic reed switch | D3 and GND | Detect door/latch state |
+| Relay module IN1 | D5 | Control the load switching relay |
+| Momentary push button | D11 and GND | Temporary manual override |
+| Relay module supply | VCC and GND | Module control supply; verify board requirements |
 
-## Relay module interface identified
+## Demonstration vs intended application
 
-Control-side labels: `VCC`, `GND`, `IN1`, `IN2`. Contact-side labels: `COM1`, `NO1`, `NC1`, `COM2`, `NO2`, `NC2`.
+**Demonstrated:** low-voltage DC fan and LED light board powered from the demonstration setup.
 
-For a typical changeover relay, COM connects to NO when energized and to NC when de-energized. Confirm this against the module datasheet and continuity measurements before wiring. The exact input polarity is unresolved; some boards are active-low.
+**Intended:** switching AC mains supply lines to room appliances such as fans and lights.
 
-The blue relays on the photographed module were marked `JQC3F-05VDC-C`. The available notes do not establish the complete module's contact-current rating, isolation arrangement or trigger polarity.
+The working low-voltage demonstration does not verify a mains-connected design. The relay contact rating provided by the team is 10 A, 250 V AC / 30 V DC, but this rating alone does not establish suitability for a motor load or the safety of the complete module and installation. Before any mains application, a qualified person must verify the exact module and datasheet, load category and inrush, isolation, PCB creepage/clearance, enclosure, conductor ratings, overcurrent protection and applicable local requirements. Do not experiment with exposed mains wiring.
 
-## Mains application: important qualification\n\nThe intended application involves switching AC mains circuits, but the available project evidence covers only the 12 V DC demonstration. A relay's contacts may be rated for AC switching, but suitability cannot be assumed from the relay name or from successful DC operation. Verify the exact module's AC voltage/current ratings, load category and inrush capacity, isolation, PCB creepage/clearance, enclosure, conductor sizing, overcurrent protection and applicable local electrical requirements. A design intended for mains must be reviewed and implemented by a suitably qualified person. Do not connect the prototype to 220 V mains as an experiment.\n\n## Open architecture decisions
+## Open implementation details
 
-1. Will one relay channel switch the fan and light together, or will separate channels control them independently?
-2. What exact behaviour should the momentary button produce?
-3. What, if anything, initiates automatic operation?
-4. What regulated supply arrangement powers the Arduino and relay module?
-5. What are the fan and LED board's measured/labelled operating currents?
-6. What protection is required for the battery, wiring and inductive motor load?
-
-## Diagram accuracy
-
-A relay symbol for an OMRON G8N-1H-AS DC12 bare relay was also discussed. Do not present that bare relay symbol as though it were the complete photographed two-channel 5 V relay module. Label diagrams clearly so readers can distinguish the bare relay component from the relay module.
+- Confirm the precise reed-switch contact behaviour and firmware state mapping.
+- Document the override duration/termination condition from the actual firmware.
+- Add the final circuit schematic and Arduino source.
+- Confirm the 5 V rechargeable battery's role, if it was part of the final circuit.
+- Record measured current and supply details for the 12 V demonstration loads.
