@@ -1,130 +1,100 @@
 # Power Latch
 
-*A Design Thinking and electronics-prototyping project exploring relay-based control of room AC power circuits, demonstrated safely with low-voltage DC loads.*
+*A Design Thinking and electronics-prototyping project for latch-triggered appliance control.*
 
-> **Project status: Working low-voltage demonstration; mains application not implemented or verified.** The physical prototype has been demonstrated operating 12 V DC loads (fan and LED) in a working video. This validates the demonstrated low-voltage setup, not a connection to room mains wiring. The intended application is switching high-voltage AC supply lines for room loads such as fans and lights.
+> **Prototype status:** A working low-voltage demonstration has been reported and a demo video is available. The intended application is room AC appliance control, but no 220–240 V mains-connected implementation or safety verification is claimed.
 
 ## Overview
 
-Power Latch is intended to provide control of high-voltage AC power lines supplying room appliances such as fans and lights. The prototype was demonstrated using a **12 V DC fan** and an **LED light board** as low-voltage stand-ins, chosen for a safer course presentation rather than connecting the system to 220 V mains in the hostel room. The control concept uses an **Arduino Nano**, a **5 V two-channel relay module**, and a **momentary push button** for manual interaction. The 12 V battery was used for the demonstration loads.
+Power Latch explores switching room appliances based on the locked/unlocked state of a door or latch. A magnet moves relative to a magnetic reed switch; an Arduino Nano reads the sensor and controls a relay module. A push button provides a temporary manual override.
 
-The work combines Design Thinking with electronics prototyping: framing a user problem, exploring alternative concepts, selecting accessible components, drawing circuit representations, experimenting in Wokwi, and planning physical implementation.
+The intended application is controlling AC supply lines for room appliances such as fans and lights. For the course demonstration, the team used a **12 V DC fan and an LED light board** rather than connecting the prototype to mains voltage.
+
+## Confirmed workflow
+
+1. The Arduino Nano and control circuit are powered.
+2. A magnet's position relative to the magnetic reed switch changes when the door/latch state changes.
+3. The reed switch signal is read by the Arduino on **D3**.
+4. The Arduino processes the sensor state.
+5. The Arduino controls the relay module through **D5 / IN1**.
+6. The relay switches the connected load circuit. In the demonstrated behaviour, locking the room turns the fan and light **OFF**; unlocking the room turns them **ON**.
+7. A push button on **D11** temporarily overrides the automatic control.
+
+The fan and light are controlled together, according to the project team's description of the demonstration. The precise timeout/condition for ending the temporary override should be documented from the actual firmware or demonstration sequence.
 
 ## At a glance
 
-| Item | Current project direction |
+| Item | Details |
 |---|---|
 | Project type | Design Thinking + electronics prototyping |
-| Controller | Arduino Nano clone |
-| Switching | Two-channel 5 V relay module; exact board behaviour/rating to verify |
-| Input | Momentary tactile push button |
-| Intended application | Switching high-voltage AC supply lines for room loads such as fans and lights |
-| Demonstration loads | 12 V DC fan and LED light board (low-voltage presentation setup) |
-| Intended load supply | Battery labelled 12 V, 12000 mAh |
-| Simulation | Initial Wokwi layout with Nano-style board, relay, servo and LED |
-| Firmware | Initial sketch only; complete tested firmware not established |
+| Controller | Arduino Nano |
+| Sensor | Magnetic reed switch, D3 |
+| Relay control | Relay module IN1, D5 |
+| Manual input | Momentary push button, D11 |
+| Demonstrated control | Lock = fan/light OFF; unlock = fan/light ON |
+| Manual override | Temporary override; exact resume condition to document |
+| Demonstration loads | 12 V DC fan and LED light board |
+| Intended application | AC-powered room appliances such as fans and lights |
+| Relay markings/specification provided | 5 V DC coil; contacts stated as 10 A, 250 V AC / 30 V DC |
+| Evidence | Working demonstration video uploaded in the project conversation; not yet committed to this repository |
 
-## Intended application vs. demonstration setup\n\nThe intended application is control of high-voltage AC supply lines feeding room appliances (for example, ceiling/room fans and lights). For the course demonstration, the team used a 12 V DC fan and LED light board instead of connecting to 220 V mains in the hostel room. The low-voltage demonstration must not be described as a mains installation or as proof that a mains-connected version has been built or tested.\n\nA relay can provide switched contacts, but whether this particular relay module and overall design are suitable for a specific AC mains load depends on verified contact ratings, load type/inrush, creepage and clearance, isolation, enclosure, wiring, protection and applicable electrical safety requirements. Mains compatibility is therefore a design and safety-validation task—not an automatic guarantee.\n\n## Problem being explored
+## Intended application vs. demonstrated prototype
 
-This project explores whether a simple microcontroller-and-relay arrangement can provide a practical, affordable alternative to repeated manual appliance switching while retaining a physical control option.
-
-**Working problem framing (hypothesis, not validated research):** People who want a simple and affordable way to control everyday appliances may benefit from a microcontroller-based controller that preserves manual interaction.
-
-The available project record does not establish completed interviews, surveys or structured observations. Claims about user behaviour, cost savings or energy savings should therefore remain hypotheses until supported by evidence.
-
-## Design principle
-
-**Automation should not remove the user's ability to intervene manually.** The momentary push button is included to explore manual override. Its exact behaviour—toggle, force a state, or temporarily override—has not yet been finalized or validated.
-
-## Conceptual system architecture
-
-```mermaid
-flowchart LR
-    U[User] --> B[Momentary push button]
-    B --> A[Arduino Nano control logic]
-    A -->|control signal| R[5 V relay module]
-    P[Nominal 12 V battery] --> C[Relay contacts]
-    R --> C
-    C --> F[12 V DC fan]
-    C --> L[LED light board]
-```
-
-This is a conceptual architecture, not a verified wiring diagram. The final control arrangement must confirm whether room fan and light circuits are switched together or independently. The low-voltage DC demonstration does not establish a mains-ready design. The battery powers the intended loads; it is not the relay module's 5 V control supply.
+The 12 V DC demonstration shows the control concept only. It is **not** a mains installation and does not prove the complete relay module, circuit layout, enclosure or wiring is safe for a particular AC appliance. Although the stated contact rating is 10 A, 250 V AC / 30 V DC, the exact module, load category, motor-starting current, isolation, creepage/clearance, enclosure, wiring, protection and local electrical requirements must be reviewed by a qualified person before any mains application. Do not connect this prototype to mains voltage as an experiment.
 
 ## Design Thinking process
 
-| Stage | Current documentation |
+| Stage | Current evidence/status |
 |---|---|
-| Empathize | Potential user groups and needs identified as hypotheses; formal research not documented |
-| Define | A simple, affordable appliance-control need framed |
-| Ideate | Manual, app/IoT, timer, sensor and Arduino/relay approaches discussed |
-| Prototype | Components identified, circuit representations discussed/created, initial Wokwi layout started |
-| Test | Test plan proposed; completed end-to-end results not available |
+| Empathize | Potential user needs have been discussed; formal interviews/surveys are not yet documented here. |
+| Define | The project explores convenient appliance control linked to securing a room. |
+| Ideate | Alternative approaches were considered in the project work; the Arduino/reed-switch/relay direction was selected. |
+| Prototype | Physical components and a low-voltage working demonstration are reported; photos/video are to be added to the repository. |
+| Test | A demo video exists; a structured test log and measurements remain to be documented. |
 
-See [Design Thinking process](docs/design-thinking-process.md).
+See [Design Thinking process](docs/design-thinking-process.md), [system design](docs/system-design.md), [hardware inventory](docs/hardware-inventory.md), and [testing and results](docs/testing-and-results.md).
 
 ## Hardware identified
 
-- Arduino Nano clone.
-- Two-channel relay module; blue relays marked `JQC3F-05VDC-C`, with control labels `VCC`, `GND`, `IN1`, `IN2`.
-- Battery labelled 12 V, 12000 mAh, with DC barrel-style output.
-- 12 V DC fan.
-- LED light board (full electrical rating not documented).
-- Momentary tactile push button.
-- Small perfboard (approximately 2 × 8 cm) and connecting wires.
+- Arduino Nano.
+- Magnetic reed switch and magnet.
+- 5 V two-channel relay module, with relays marked `JQC3F-05VDC-C`.
+- Momentary push button.
+- Battery labelled 12 V, 12000 mAh for the demonstration loads.
+- 12 V DC fan and LED light board.
+- Perfboard/PCB assembly, connecting wires, and latch hardware.
+- A separate 5 V rechargeable battery is also shown on the material-selection slide; its exact role in the final circuit needs confirmation.
 
-See [hardware inventory](docs/hardware-inventory.md) and [bill of materials](hardware/bill-of-materials.md). Component availability does not establish that the complete circuit has been assembled or tested.
+## Current limitations
 
-## Simulation and firmware
-
-An initial Wokwi layout has been described with an Arduino Nano-style board, relay, servo and LED. The servo is a visual stand-in for fan behaviour in the simulation; it is not electrically equivalent to a continuously rotating DC fan. A complete tested sketch and shareable Wokwi link have not been established.
-
-See [simulation and firmware notes](docs/simulation-and-firmware.md). The `src/arduino/` folder is a placeholder until the actual sketch is available and reviewed.
-
-## Implementation status
-
-| Work item | Status based on available project notes |
-|---|---|
-| Project direction and intended loads | Established |
-| Physical components identified in project photographs | Evidence of components available |
-| Relay and push-button representations | Discussed/created |
-| Wokwi layout | Started; successful run not established |
-| Arduino firmware | Initial sketch only; complete tested firmware not established |
-| Final physical wiring / soldered perfboard | Not confirmed |
-| End-to-end operation of both loads | Not confirmed |
-| Manual-override behaviour | Not finalized or tested |
-| User validation and measured energy savings | Not documented |
-
-“Not confirmed” means the available project record does not establish completion; it does not prove the work has never been done.
-
-## Testing
-
-A working video of the low-voltage DC prototype is available to the team and should be added as evidence. A structured test log with measurements is not yet documented. See [Testing and results](docs/testing-and-results.md).
+- The final firmware/source code has not yet been added to this repository.
+- The exact logic that ends the temporary manual override needs documenting from the code/video.
+- The actual circuit diagram and evidence media still need to be committed.
+- No mains-connected build, mains test, formal electrical safety review, measured energy savings or formal user validation is claimed.
 
 ## Safety
 
-Battery and motor circuits can cause overheating, short circuits or damage if wired incorrectly. Verify battery polarity and actual voltage with a multimeter; do not infer polarity from wire colour. Keep the 12 V load path separate from the 5 V relay-control supply. Do not use an Arduino GPIO pin to power a real fan or other load. Verify relay contact ratings against each load's operating and startup current, and use appropriate protection, insulation and strain relief. This documentation does not establish that the design has been safety-tested. Do not connect mains voltage as part of this prototype without a properly engineered, rated and safely enclosed design and qualified supervision.
+Keep the low-voltage control and load circuits correctly separated. Confirm supply polarity, relay input polarity, load current and motor startup current before testing. A relay rating alone does not establish that a complete mains installation is safe. Any mains design must be appropriately rated, enclosed, protected and reviewed/implemented by a qualified person.
 
 ## Repository structure
 
-- `docs/` — Design Thinking process, system design, hardware, simulation, testing and next steps.
+- `docs/` — Design Thinking process, system design, hardware, simulation and testing.
 - `hardware/` — Preliminary bill of materials.
-- `simulation/` — Wokwi documentation.
-- `diagrams/` — Circuit-diagram placeholders.
-- `assets/` — Component and prototype-photo placeholders.
-- `src/arduino/` — Firmware placeholder.
-- `testing/` — Test evidence and records.
+- `assets/components/` — Component reference images.
+- `assets/prototype/` — Prototype photos and video links.
+- `src/arduino/` — Firmware.
+- `simulation/` — Simulation notes.
+- `testing/` — Test records and evidence.
 
 ## Next steps
 
-1. Add the actual circuit diagram and original component/prototype photographs.
-2. Finalize and explain manual-override behaviour.
-3. Confirm relay trigger polarity, wiring and electrical ratings.
-4. Complete the Wokwi model and add its share link, if available.
-5. Add the real Arduino sketch once complete and tested.
-6. Record physical tests with expected result, actual result, date and supporting evidence.
-7. Add genuine user research or clearly retain the problem framing as a hypothesis.
+1. Add prototype photos and link the working demo video.
+2. Add the final report and use it to strengthen the Design Thinking-stage documentation.
+3. Add the final circuit diagram and Arduino code.
+4. Document the temporary override's exact resume condition.
+5. Record repeatable low-voltage test results.
+6. Treat AC implementation as a separate engineering and safety-validation task.
 
 ## License
 
-No license is included yet. Decide how you want others to reuse the documentation, diagrams and code before adding one. Public visibility does not by itself grant permission to reuse the work.
+No license is included yet. Choose a license before inviting others to reuse the code or documentation.
