@@ -1,47 +1,66 @@
 # Design Thinking Process
 
-This document describes the Design Thinking work reflected in the available project notes. It distinguishes design intentions and hypotheses from validated research or test results.
+This document summarizes the Design Thinking process based on the project notes and the team's description of the physical demonstration. It separates known design decisions from research or measurements that have not yet been documented.
 
 ## 1. Empathize: intended users and potential needs
 
-Potential users discussed include students living in hostels or shared accommodation, people in budget-conscious households, and people who prefer physical controls alongside automation.
+The project is aimed at people who use room appliances such as fans and lights and may want appliances to switch off when they secure and leave a room. Potential user groups discussed include students in hostels/shared accommodation and people seeking a simple, affordable alternative to more elaborate smart-home systems.
 
-Potential needs include convenient fan/light control, affordability, simplicity, reliability and the ability to retain manual control.
+Potential needs include convenience, affordability, simple operation, reliable switching and a way to manually override automation.
 
-**Evidence limitation:** The available notes do not establish that interviews, surveys or structured observations were conducted. These are potential user groups and needs, not confirmed research findings.
+**Evidence limitation:** Formal interviews, surveys or structured observations have not yet been documented in this repository. These user needs should be treated as the project's initial assumptions until the final report or research evidence supports them.
 
 ## 2. Define: problem framing
 
-The project explores the inconvenience of repeated manual appliance control and the possibility that appliances may be left running unnecessarily. More elaborate smart-home systems may add cost, setup complexity or wireless dependence.
+The project addresses the possibility of room appliances being left running when a person secures and leaves the room, while aiming to avoid making the user rely entirely on a new manual habit.
 
-**Working problem statement:** People who want a simple and affordable way to control everyday appliances need a practical control system that provides convenient switching while retaining a manual way to intervene.
+**Working problem statement:** How might we make it easier to manage room fan and light power when a person locks or unlocks a room, while preserving a simple manual override?
 
-This is a project framing, not a finding proven by user research.
+This is the project's framing, not a result proven by formal user research.
 
-## 3. Ideate: concepts discussed
+## 3. Ideate: concepts considered
 
-| Concept | Rationale | Evidence/status |
+| Concept | Rationale | Status in available project notes |
 |---|---|---|
-| Conventional manual switching | Familiar and straightforward baseline | Discussed; no formal comparative study documented |
-| App-based / IoT control | Could enable remote operation | Discussed as an alternative; implementation not established |
-| Timer-based control | Could switch appliances at set times | Discussed; implementation not established |
-| Sensor-based automation | Could respond to occupancy or environmental conditions | Discussed; implementation not established |
-| Arduino with relay switching | Programmable control with accessible electronics and physical inputs | Selected project direction |
+| Conventional manual switching | Familiar and straightforward | Discussed as a baseline |
+| App-based / IoT control | Could allow remote operation | Considered as an alternative; not identified as the selected implementation |
+| Timer-based control | Could switch appliances at set times | Considered as an alternative |
+| Sensor-based automation | Could react to room conditions | Broad alternative discussed |
+| Latch/door-state sensing with Arduino and relay | Connects appliance control to the locked/unlocked state | Selected project direction |
 
-The notes do not establish a formal idea-selection workshop, scoring matrix or user-preference evaluation.
+The available notes do not establish a formal scored comparison or user-preference study.
 
-## 4. Prototype: selected direction
+## 4. Prototype: material selection and implementation
 
-The selected direction combines an Arduino Nano, relay module, physical momentary push button and intended DC loads (a fan and LED light). Physical components have been identified, relay and button diagrams have been discussed or created, and an initial Wokwi layout has been started.
+The selected concept uses a magnetic reed switch and magnet to detect a change in door/latch position. An Arduino Nano processes that input and controls a relay module. A push button provides temporary manual override.
 
-The key design principle is that automation should not eliminate the user's ability to control the appliance manually. The exact button interaction remains an open design decision.
+The team-provided pin mapping is:
+- Reed switch: D3 and GND.
+- Relay module input IN1: D5.
+- Push button: D11 and GND.
 
-## 5. Test: evidence and validation
+The material-selection slide shows a rechargeable 5 V battery, relay module, magnetic reed switch, Arduino Nano, 12 V battery, fan, PCB/perfboard assembly and latch hardware. The role of the 5 V rechargeable battery in the final circuit still needs confirmation.
 
-The available record does not establish successful end-to-end physical testing, verified firmware behaviour, completed simulation tests or user validation.
+The intended application is AC room-appliance control. For the course demonstration, the team used a 12 V DC fan and LED light board rather than connecting to 220–240 V mains.
 
-When testing occurs, document the setup, expected behaviour, actual observations, measurements and instruments, failures, changes, retest results and supporting evidence.
+## 5. Test: reported demonstration behaviour
+
+The team reports that the demonstration shows:
+- Locking the room turns the fan and light OFF.
+- Unlocking the room turns the fan and light ON.
+- The push button temporarily overrides automatic control.
+- The fan and light are controlled together.
+
+A working demonstration video has been supplied in the project conversation, but it has not yet been added or linked in this repository. Structured test logs, measurements, repeatability data and the exact condition for ending the temporary override still need to be recorded.
+
+No mains-connected test, measured energy savings or formal user-validation results are claimed.
+
+## 6. Learnings and opportunities for growth
+
+The project connects a physical action—securing or releasing a room—with an automatic appliance-control response. The manual override is an important usability feature because users may need to depart from the automatic state.
+
+Useful next steps are to add the final report and media evidence, document the exact override behaviour, publish the final circuit and firmware, repeat the low-voltage tests with a test log, and gather genuine user feedback. Any future AC implementation must be separately reviewed for load suitability and electrical safety by a qualified person.
 
 ## Summary
 
-The project has a defined direction and an emerging prototype, but the empathy and testing stages need stronger evidence. Add genuine user research and observed test results rather than retrospectively presenting assumptions as findings.
+Power Latch has a defined concept, selected hardware and a reported working low-voltage demonstration. The public record will become stronger as the final report, photographs/video, firmware, circuit diagram and repeatable test records are added. Do not present assumed user needs as research findings or the low-voltage demo as a verified mains installation.
