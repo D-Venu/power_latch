@@ -1,12 +1,12 @@
 # Power Latch
 
-*A Design Thinking and electronics-prototyping project exploring simple control of everyday DC appliances.*
+*A Design Thinking and electronics-prototyping project exploring relay-based control of room AC power circuits, demonstrated safely with low-voltage DC loads.*
 
-> **Project status: Design and prototyping.** The project direction, component identification, circuit representations and an initial Wokwi layout are documented. The available project record does **not** yet verify a complete working physical prototype, final firmware, or end-to-end test results.
+> **Project status: Working low-voltage demonstration; mains application not implemented or verified.** The physical prototype has been demonstrated operating 12 V DC loads (fan and LED) in a working video. This validates the demonstrated low-voltage setup, not a connection to room mains wiring. The intended application is switching high-voltage AC supply lines for room loads such as fans and lights.
 
 ## Overview
 
-Power Latch explores a low-cost way to control a 12 V DC fan and an LED light board using an **Arduino Nano**, a **5 V two-channel relay module**, and a **momentary push button** for manual interaction. The intended load supply is a battery labelled 12 V, 12000 mAh.
+Power Latch is intended to provide control of high-voltage AC power lines supplying room appliances such as fans and lights. The prototype was demonstrated using a **12 V DC fan** and an **LED light board** as low-voltage stand-ins, chosen for a safer course presentation rather than connecting the system to 220 V mains in the hostel room. The control concept uses an **Arduino Nano**, a **5 V two-channel relay module**, and a **momentary push button** for manual interaction. The 12 V battery was used for the demonstration loads.
 
 The work combines Design Thinking with electronics prototyping: framing a user problem, exploring alternative concepts, selecting accessible components, drawing circuit representations, experimenting in Wokwi, and planning physical implementation.
 
@@ -18,12 +18,13 @@ The work combines Design Thinking with electronics prototyping: framing a user p
 | Controller | Arduino Nano clone |
 | Switching | Two-channel 5 V relay module; exact board behaviour/rating to verify |
 | Input | Momentary tactile push button |
-| Intended loads | 12 V DC fan and LED light board |
+| Intended application | Switching high-voltage AC supply lines for room loads such as fans and lights |
+| Demonstration loads | 12 V DC fan and LED light board (low-voltage presentation setup) |
 | Intended load supply | Battery labelled 12 V, 12000 mAh |
 | Simulation | Initial Wokwi layout with Nano-style board, relay, servo and LED |
 | Firmware | Initial sketch only; complete tested firmware not established |
 
-## Problem being explored
+## Intended application vs. demonstration setup\n\nThe intended application is control of high-voltage AC supply lines feeding room appliances (for example, ceiling/room fans and lights). For the course demonstration, the team used a 12 V DC fan and LED light board instead of connecting to 220 V mains in the hostel room. The low-voltage demonstration must not be described as a mains installation or as proof that a mains-connected version has been built or tested.\n\nA relay can provide switched contacts, but whether this particular relay module and overall design are suitable for a specific AC mains load depends on verified contact ratings, load type/inrush, creepage and clearance, isolation, enclosure, wiring, protection and applicable electrical safety requirements. Mains compatibility is therefore a design and safety-validation task—not an automatic guarantee.\n\n## Problem being explored
 
 This project explores whether a simple microcontroller-and-relay arrangement can provide a practical, affordable alternative to repeated manual appliance switching while retaining a physical control option.
 
@@ -48,7 +49,7 @@ flowchart LR
     C --> L[LED light board]
 ```
 
-This is a conceptual architecture, not a verified wiring diagram. The final circuit must confirm whether the fan and light are switched together or independently. The battery powers the intended loads; it is not the relay module's 5 V control supply.
+This is a conceptual architecture, not a verified wiring diagram. The final control arrangement must confirm whether room fan and light circuits are switched together or independently. The low-voltage DC demonstration does not establish a mains-ready design. The battery powers the intended loads; it is not the relay module's 5 V control supply.
 
 ## Design Thinking process
 
@@ -98,7 +99,7 @@ See [simulation and firmware notes](docs/simulation-and-firmware.md). The `src/a
 
 ## Testing
 
-No completed test log is available in the project summary. A test plan and record template are provided in [Testing and results](docs/testing-and-results.md).
+A working video of the low-voltage DC prototype is available to the team and should be added as evidence. A structured test log with measurements is not yet documented. See [Testing and results](docs/testing-and-results.md).
 
 ## Safety
 
