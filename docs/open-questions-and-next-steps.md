@@ -7,16 +7,16 @@
 - [ ] Define what initiates automatic operation, if any.
 - [ ] Define the power-up and reset state.
 
-## Electrical design
+## Intended AC mains application\n\n- [ ] Develop a separate, properly engineered mains-side design for room AC circuits (such as fan and light loads); this is the intended application, not the low-voltage demonstration.\n- [ ] Verify whether the exact relay module is rated for the intended AC voltage, load current, load type and inrush current; do not assume AC suitability from the relay marking alone.\n- [ ] Review isolation, creepage/clearance, enclosure, wiring, strain relief, earthing where applicable, and overcurrent protection with a qualified person.\n- [ ] Ensure the final mains implementation complies with applicable local electrical codes and safety requirements.\n- [ ] Do not connect the current prototype directly to 220 V mains without a separately validated, properly enclosed design and qualified supervision.\n\n## Electrical design
 
 - [ ] Record exact Arduino Nano clone variant.
 - [ ] Identify exact relay module and confirm input polarity.
-- [ ] Confirm relay contact ratings and suitability for fan startup current and LED load.
-- [ ] Record fan model, operating current and startup characteristics.
+- [ ] Confirm relay contact ratings and suitability for the intended AC room loads, including fan motor inrush; separately verify the 12 V demonstration load ratings.
+- [ ] Record the 12 V demonstration fan model/current and identify representative intended room-load ratings.
 - [ ] Record LED board voltage/current and driver requirements.
 - [ ] Verify battery output voltage, polarity and current capability under intended load.
 - [ ] Document how Arduino and relay module receive their required supply.
-- [ ] Finalize load wiring and protection.
+- [ ] Finalize low-voltage demonstration wiring and protection; develop and independently review mains wiring/protection before any AC implementation.
 
 ## Simulation and firmware
 
