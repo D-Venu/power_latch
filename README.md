@@ -98,24 +98,7 @@ See [Design Thinking process](docs/design-thinking-process.md), [system design](
 
 Keep the low-voltage control and load circuits correctly separated. Confirm supply polarity, relay input polarity, load current and motor startup current before testing. A relay rating alone does not establish that a complete mains installation is safe. Any mains design must be appropriately rated, enclosed, protected and reviewed/implemented by a qualified person.
 
-## Repository structure
-
-- `docs/` — Design Thinking process, system design, hardware, simulation and testing.
-- `hardware/` — Preliminary bill of materials.
-- `assets/components/` — Component reference images.
-- `assets/prototype/` — Material-selection image and demonstration-video link.
-- `src/arduino/` — Firmware.
-- `simulation/` — Simulation notes.
-- `testing/` — Test records and evidence.
-
 ## Next steps
 
-1. Add the final report and use it to strengthen the Design Thinking-stage documentation.
-2. Add the final circuit diagram.
-3. Verify/document the manual override behaviour and relay trigger polarity.
-4. Record repeatable low-voltage test results.
-5. Treat AC implementation as a separate engineering and safety-validation task.
-
-## License
-
-No license is included yet. Choose a license before inviting others to reuse the code or documentation.
+1. Record repeatable low-voltage test results.
+2. Treat AC implementation as a separate engineering and safety-validation task.
