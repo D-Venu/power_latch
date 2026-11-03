@@ -20,7 +20,7 @@ The intended application is controlling AC supply lines for room appliances such
 6. The relay switches the connected load circuit. In the demonstrated behaviour, locking the room turns the fan and light **OFF**; unlocking the room turns them **ON**.
 7. A push button on **D11** temporarily overrides the automatic control.
 
-The fan and light are controlled together, according to the project team's description of the demonstration. The precise timeout/condition for ending the temporary override should be documented from the actual firmware.
+The fan and light are controlled together, according to the project team's description of the demonstration. The uploaded sketch implements a button-triggered 10-second delay; see [firmware notes](src/arduino/README.md) for the distinction between code behaviour and intended system behaviour.
 
 ## At a glance
 
@@ -32,7 +32,7 @@ The fan and light are controlled together, according to the project team's descr
 | Relay control | Relay module IN1, D5 |
 | Manual input | Momentary push button, D11 |
 | Demonstrated control | Lock = fan/light OFF; unlock = fan/light ON |
-| Manual override | Temporary override; exact resume condition to document |
+| Manual override | Button input forces relay output LOW and invokes a 10-second delay in the sketch |
 | Demonstration loads | 12 V DC fan and LED light board |
 | Intended application | AC-powered room appliances such as fans and lights |
 | Relay markings/specification provided | 5 V DC coil; contacts stated as 10 A, 250 V AC / 30 V DC |
@@ -48,11 +48,17 @@ The image below shows the components selected for the project.
 
 ### Working demonstration
 
-[Watch the Power Latch prototype demonstration on YouTube](https://youtu.be/SxAZail_Stw)
+[![Watch the Power Latch prototype demonstration](https://img.youtube.com/vi/SxAZail_Stw/hqdefault.jpg)](https://youtu.be/SxAZail_Stw)
 
 The demonstration uses low-voltage loads (12 V DC fan and LED light board); it does not demonstrate a connection to AC mains.
 
 See [prototype evidence](assets/prototype/README.md) for the media index.
+
+## Arduino firmware
+
+The original sketch supplied for the project is available at **[src/arduino/power_latch.ino](src/arduino/power_latch.ino)**.
+
+The sketch configures the reed switch on D3 and button on D11 with internal pull-ups, and drives the relay input on D5. It includes a 20 ms reed-input debounce routine and a 10-second delay after a detected button press. Review the [firmware notes](src/arduino/README.md) for important implementation details and points to verify before treating the sketch as a fully validated controller.
 
 ## Intended application vs. demonstrated prototype
 
@@ -83,8 +89,8 @@ See [Design Thinking process](docs/design-thinking-process.md), [system design](
 
 ## Current limitations
 
-- The final firmware/source code has not yet been added to this repository.
-- The exact logic that ends the temporary manual override needs documenting from the code.
+- The supplied Arduino sketch is now included, but its complete behaviour should be reviewed and bench-verified; it has not been silently modified.
+- The exact behaviour of the temporary manual override should be checked against the physical demonstration and firmware.
 - The actual circuit diagram still needs to be added.
 - No mains-connected build, mains test, formal electrical safety review, measured energy savings or formal user validation is claimed.
 
@@ -105,8 +111,8 @@ Keep the low-voltage control and load circuits correctly separated. Confirm supp
 ## Next steps
 
 1. Add the final report and use it to strengthen the Design Thinking-stage documentation.
-2. Add the final circuit diagram and Arduino code.
-3. Document the temporary override's exact resume condition.
+2. Add the final circuit diagram.
+3. Verify/document the manual override behaviour and relay trigger polarity.
 4. Record repeatable low-voltage test results.
 5. Treat AC implementation as a separate engineering and safety-validation task.
 
