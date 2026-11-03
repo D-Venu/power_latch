@@ -20,7 +20,7 @@ The intended application is controlling AC supply lines for room appliances such
 6. The relay switches the connected load circuit. In the demonstrated behaviour, locking the room turns the fan and light **OFF**; unlocking the room turns them **ON**.
 7. A push button on **D11** temporarily overrides the automatic control.
 
-The fan and light are controlled together, according to the project team's description of the demonstration. The precise timeout/condition for ending the temporary override should be documented from the actual firmware or demonstration sequence.
+The fan and light are controlled together, according to the project team's description of the demonstration. The precise timeout/condition for ending the temporary override should be documented from the actual firmware.
 
 ## At a glance
 
@@ -36,7 +36,23 @@ The fan and light are controlled together, according to the project team's descr
 | Demonstration loads | 12 V DC fan and LED light board |
 | Intended application | AC-powered room appliances such as fans and lights |
 | Relay markings/specification provided | 5 V DC coil; contacts stated as 10 A, 250 V AC / 30 V DC |
-| Evidence | Working demonstration video uploaded in the project conversation; not yet committed to this repository |
+| Evidence | Material-selection image and linked working demonstration video |
+
+## Prototype evidence
+
+### Material selection
+
+The image below shows the components selected for the project.
+
+![Power Latch material selection](assets/prototype/material-selection-slide.png)
+
+### Working demonstration
+
+[Watch the Power Latch prototype demonstration on YouTube](https://youtu.be/SxAZail_Stw)
+
+The demonstration uses low-voltage loads (12 V DC fan and LED light board); it does not demonstrate a connection to AC mains.
+
+See [prototype evidence](assets/prototype/README.md) for the media index.
 
 ## Intended application vs. demonstrated prototype
 
@@ -49,8 +65,8 @@ The 12 V DC demonstration shows the control concept only. It is **not** a mains 
 | Empathize | Potential user needs have been discussed; formal interviews/surveys are not yet documented here. |
 | Define | The project explores convenient appliance control linked to securing a room. |
 | Ideate | Alternative approaches were considered in the project work; the Arduino/reed-switch/relay direction was selected. |
-| Prototype | Physical components and a low-voltage working demonstration are reported; photos/video are to be added to the repository. |
-| Test | A demo video exists; a structured test log and measurements remain to be documented. |
+| Prototype | Physical components and a low-voltage working demonstration are reported; material-selection evidence is included above. |
+| Test | A demo video is linked above; a structured test log and measurements remain to be documented. |
 
 See [Design Thinking process](docs/design-thinking-process.md), [system design](docs/system-design.md), [hardware inventory](docs/hardware-inventory.md), and [testing and results](docs/testing-and-results.md).
 
@@ -68,8 +84,8 @@ See [Design Thinking process](docs/design-thinking-process.md), [system design](
 ## Current limitations
 
 - The final firmware/source code has not yet been added to this repository.
-- The exact logic that ends the temporary manual override needs documenting from the code/video.
-- The actual circuit diagram and evidence media still need to be committed.
+- The exact logic that ends the temporary manual override needs documenting from the code.
+- The actual circuit diagram still needs to be added.
 - No mains-connected build, mains test, formal electrical safety review, measured energy savings or formal user validation is claimed.
 
 ## Safety
@@ -81,19 +97,18 @@ Keep the low-voltage control and load circuits correctly separated. Confirm supp
 - `docs/` — Design Thinking process, system design, hardware, simulation and testing.
 - `hardware/` — Preliminary bill of materials.
 - `assets/components/` — Component reference images.
-- `assets/prototype/` — Prototype photos and video links.
+- `assets/prototype/` — Material-selection image and demonstration-video link.
 - `src/arduino/` — Firmware.
 - `simulation/` — Simulation notes.
 - `testing/` — Test records and evidence.
 
 ## Next steps
 
-1. Add prototype photos and link the working demo video.
-2. Add the final report and use it to strengthen the Design Thinking-stage documentation.
-3. Add the final circuit diagram and Arduino code.
-4. Document the temporary override's exact resume condition.
-5. Record repeatable low-voltage test results.
-6. Treat AC implementation as a separate engineering and safety-validation task.
+1. Add the final report and use it to strengthen the Design Thinking-stage documentation.
+2. Add the final circuit diagram and Arduino code.
+3. Document the temporary override's exact resume condition.
+4. Record repeatable low-voltage test results.
+5. Treat AC implementation as a separate engineering and safety-validation task.
 
 ## License
 
