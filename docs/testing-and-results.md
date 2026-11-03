@@ -2,7 +2,11 @@
 
 ## Evidence available
 
-The team has supplied a working demonstration video in the project conversation and a material-selection slide showing key components and prototype hardware. The video still needs to be added or linked in this repository. The reported physical demonstration uses a 12 V DC fan and an LED light board; it does not establish a 220–240 V mains-connected build or its safety.
+The repository includes the material-selection image at `assets/prototype/material-selection-slide.png` and links to the team's working demonstration video:
+
+[Watch the Power Latch prototype demonstration](https://youtu.be/SxAZail_Stw)
+
+The reported physical demonstration uses a 12 V DC fan and an LED light board; it does not establish a 220–240 V mains-connected build or its safety.
 
 ## Demonstrated behaviour reported by the team
 
@@ -14,7 +18,7 @@ The team has supplied a working demonstration video in the project conversation 
 | Fan and light | Controlled together | Confirmed by the team |
 | Demonstration load type | 12 V DC fan and LED light board | Low-voltage demonstration; no mains test claimed |
 
-These are documented as team-reported demonstration behaviour. Add a dated test record and the video link when the media is committed.
+These are documented as team-reported demonstration behaviour. A dated test record, measured results and relevant video timestamps can be added when available.
 
 ## Verification matrix
 
@@ -50,4 +54,4 @@ Evidence filename/link and timestamp:
 
 ## Results summary
 
-A working low-voltage demonstration is reported by the team. Structured measurements, repeatability data, energy-savings measurements, formal user-validation results and mains safety verification are not documented here. These should remain unclaimed unless supporting evidence is added.
+A working low-voltage demonstration is reported by the team and linked above. Structured measurements, repeatability data, energy-savings measurements, formal user-validation results and mains safety verification are not documented here. These should remain unclaimed unless supporting evidence is added.
